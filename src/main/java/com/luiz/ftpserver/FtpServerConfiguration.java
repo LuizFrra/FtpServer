@@ -1,5 +1,6 @@
 package com.luiz.ftpserver;
 
+import org.apache.ftpserver.DataConnectionConfigurationFactory;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.filesystem.nativefs.NativeFileSystemFactory;
@@ -38,6 +39,9 @@ public class FtpServerConfiguration {
         ListenerFactory listenerFactory = new ListenerFactory();
         listenerFactory.setPort(2121);
         listenerFactory.setSslConfiguration(sslConfiguration);
+        DataConnectionConfigurationFactory connectionConfigurationFactory = new DataConnectionConfigurationFactory();
+        connectionConfigurationFactory.setPassivePorts("10000-10125");
+        listenerFactory.setDataConnectionConfiguration(connectionConfigurationFactory.createDataConnectionConfiguration());
         return listenerFactory;
     }
 
